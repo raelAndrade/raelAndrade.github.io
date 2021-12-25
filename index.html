@@ -855,9 +855,11 @@
 		</section>
 
 		<section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="codbarra">
-			<div class="w-100">
-				<div id="camera"></div>
-				<h2 id="cod-de-barra"></h2>
+			<div class="row col-md-6 offset-md-3">
+				<div class="w-100">
+					<div id="camera"></div>
+					<h2 id="cod-de-barra"></h2>
+				</div>
 			</div>
 		</section>
 
@@ -874,9 +876,15 @@
             inputStream : {
                 name : "Live",
                 type : "LiveStream",
-                target: document.querySelector('#camera')
+                target: document.querySelector('#camera'),
+				constraints: {
+                    width: {min: 1, max: 680},
+                    height: {min: 1, max: 420},
+                    aspectRatio: {min: 1, max: 100},
+                    facingMode: "environment"
+                }
             },
-                decoder : {
+            decoder : {
                 readers : ["code_128_reader"]
             }
         }, function(err) {
