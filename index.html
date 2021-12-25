@@ -876,16 +876,14 @@
             inputStream : {
                 name : "Live",
                 type : "LiveStream",
-                target: document.querySelector('#camera'),
-				constraints: {
-                    width: {min: 720},
-                    height: {min: 320},
-                    aspectRatio: {min: 1, max: 100},
-                    facingMode: "environment"
-                }
+                target: document.querySelector('#camera')				
             },
+			frequency: 10,
             decoder : {
-                readers : ["code_128_reader"]
+                readers : [
+					"code_128_reader"
+				],
+				multiple: false
             }
         }, function(err) {
             if (err) {
@@ -894,6 +892,7 @@
             }
             console.log("Initialization finished. Ready to start");
             Quagga.start();
+			Quagga.onDetected(this.onDetected)
         });
 
         Quagga.onDetected(function (data) {
@@ -907,6 +906,16 @@
         });
 
     </script>
+	<style>
+		video {
+			width: 100%;
+			height: auto;
+		}
+
+		canvas {
+			display: none;
+		}
+	</style>
 </body>
 
 </html>
